@@ -1,0 +1,51 @@
+<h1>Gebruikers</h1>
+
+<div *ngIf="fout" class="alert alert-danger">
+  Geen gegevens om te laden!
+</div>
+<div *ngIf="!fout">
+<div class="block">
+  <img src="../../assets/users.png">
+  </div>
+  <div class="block">
+  <input type="text" class="form-control" name="searchString" placeholder="Zoek op achternaam..." [(ngModel)]="searchString">
+</div>
+<br>
+<br>
+<div class = "card">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Voornaam</th>
+      <th scope="col">Tussenvoegsel</th>
+      <th scope="col">Achternaam</th>
+      <th scope="col">E-mailadres</th>
+      <th scope="col">Rechten</th>
+      <th scope="col">Werkzaam</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users | filter : 'achternaam' : searchString | sortBy: 'werkzaam'; let i = index" >
+      <td >{{user.voornaam}}</td>
+      <td>{{user.tussenvoegsel}}</td>
+      <td>{{user.achternaam}}</td> 
+      <td>{{user.email}}</td>
+      <td *ngIf="user.rechten == 1">Administrator</td>
+      <td *ngIf="user.rechten != 1">Personeel</td>
+      <td *ngIf="user.werkzaam != 1">
+      <select #selectElement (change)="setAsEmployed(user)">
+          <option>Nee</option>
+          <option>Ja</option>
+        </select>
+        </td>
+      <td *ngIf="user.werkzaam == 1">
+        <select #selectElement (change)="setAsEmployed(user)">
+          <option>Ja</option>
+          <option>Nee</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>

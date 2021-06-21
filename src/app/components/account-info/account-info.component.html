@@ -1,0 +1,81 @@
+<div ng-app="myApp" ng-controller="myController" class="container">
+<form name="myForm">
+<div class="account_container">
+<div class="row">
+  <h1>Account</h1>
+    <table>
+      <div class="card" style="padding: 20px;">
+      <tr>
+        <td><label for="Voornaam">Voornaam: </label> </td>
+        <td><label type="text" id="Voornaam" style="font-weight: bold;"> {{ user.achternaam }}</label></td>
+      </tr>
+      <tr>
+          <td><label for="tussen">Tussenvoegsel: </label> </td>
+          <td><label type="text" id="tussen" style="font-weight: bold;">{{ user.tussenvoegsel }} </label></td>
+      </tr>
+      <tr>
+          <td><label for="achternaam">Achternaam: </label> </td>
+          <td><label type="text" id="achternaam" style="font-weight: bold;">{{ user.voornaam }}</label></td>
+      </tr>
+      <tr>
+          <td><label for="Email">Email: </label> </td>
+          <td><label type="text" id="Email" style="font-weight: bold;">{{user.email}}</label></td>
+      </tr>
+      </div>
+
+      <div class="card" style="padding: 20px;">
+      <tr>
+        <td colspan="2"><h4>Verander uw wachtwoord</h4></td>
+      </tr>
+      <tr>
+          <td><label for="oldPass">Oude wachtwoord: </label> </td>
+          <td><input
+            type="password"
+            class="form-control"
+            id="oldPass"
+            [(ngModel)]="oldPassword"
+            #oldPass="ngModel"
+            name="oldPassword"
+          ></td>
+      </tr>
+      <tr>
+        <td><label for="newPass">Nieuw wachtwoord:</label></td>
+        <td><input
+          type="password"
+          class="form-control"
+          id="newPass"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+          #newPass="ngModel"
+          minlength="8"
+          ></td>
+      </tr>
+      <tr>
+        <td><label for="repeatNewPass">Herhaal nieuw wachtwoord:</label></td>
+        <td><input
+          type="password"
+          class="form-control"
+          id="repeatNewPass"
+          [(ngModel)]="repeatNewPassword"
+          name="repeatNewPassword"
+          #repeatNewPass="ngModel"
+          minlength="8"
+          ></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="button" class="btn btn-primary" (click)="changePassword()" >Opslaan</button>
+          <div *ngIf="passwordMeetsRequirements == false" class="alert alert-danger">
+            Wachtwoorden zijn niet gelijk of het wachtwoord voldoet niet aan eisen (minimaal 8 karakters lang).
+          </div>
+          <div *ngIf="passwordChanged" class="alert alert-success">
+            Wachtwoord succesvol veranderd!
+          </div>
+        </td>
+      </tr>
+      </div>
+    </table>
+</div>
+</div>
+</form>
+</div>

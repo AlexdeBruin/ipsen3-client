@@ -1,0 +1,124 @@
+<div class="container">
+  <h1>Uren registreren</h1>
+  <div class="card" style="padding: 20px;">
+  <div class="form-group">
+    <table>
+      <tr>
+        <td><label for="klant">Klant: </label> </td>
+        <td>
+          <select (change)="getProjects() || setProjects()" class="form-control" id="klant"
+          [(ngModel)]="hour.customerName"
+          name=customerName>
+            <option></option>
+            <option *ngFor="let customer of customers">{{ customer.customerName }}</option>
+          </select>
+        </td>
+        <td><label for="begindatum">Begindatum: </label></td>
+        <td><input type="date" value="{{date}}" class="form-control" id="einddatum"
+          [(ngModel)]="hour.startingDate"
+          name="startingDate"></td>
+      </tr>
+      <tr>
+        <td><label for="project">Project: </label> </td>
+        <td class="td"><select [disabled]="!hour.customerName"
+          (change)="getSubjects()" class="form-control" id="project"
+          [(ngModel)]="hour.projectName"
+          name=projectName>
+            <option></option>
+            <option *ngFor="let project of projects">{{ project.projectName }}</option>
+          </select></td>
+          <td><label for="begintijd">Begintijd: </label></td>
+          <td><input type="time" class="form-control" id="begintijd"
+            [(ngModel)]="hour.startingTime"
+            name="startingTime"></td>
+
+      </tr>
+      <tr>
+        <td><label for="onderwerp">Onderwerp: </label> </td>
+        <td><select [disabled]="!hour.projectName || !hour.customerName"
+          class="form-control" id="Subject"
+          [(ngModel)]="hour.subjectName"
+          name=subjectName>
+            <option></option>
+            <option *ngFor="let subject of subjects">{{ subject.subjectName }}</option>
+          </select></td>
+
+        <td><label for="eindtijd">Eindtijd: </label></td>
+        <td><input type="time" class="form-control" id="eindtijd"
+          (click)="setEndTime()"
+          [(ngModel)]="hour.endingTime"
+          name="endingTime"></td>
+      </tr>
+      <tr>
+        <td><label for="commentaar">Commentaar: </label> </td>
+        <td colspan="3" class="td"><input type="text" class="form-control" id="commentaar"
+          [(ngModel)]="hour.comment"
+          name="comment" ></td>
+
+       <td></td>
+       <td></td>
+
+
+      </tr>
+      <tr>
+        <td colspan="4" class="td-button">
+          <button type="button" [disabled]="fout" class="btn btn-primary" (click)="registerHours() || empty()">Opslaan</button>
+          <div *ngIf="registered" class="alert alert-success" >
+            Uur geregistreerd!
+          </div>
+        </td>
+      </tr>
+
+    </table>
+    <div style="width: 100%;"*ngIf="fout" class="alert alert-success">
+      Er is iets mis gegaan!
+    </div>
+    <div style="width: 100%;"*ngIf="opgeslagen" class="alert alert-success">
+      <strong>Gelukt!</strong> De ingevulde uren zijn opgeslagen.
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="addingstuff-container">
+    <div class="card" style="padding: 20px;">
+      <table>
+        <th colspan="2"><h3>Categorie toevoegen</h3></th>
+        <tr>
+          <td>
+            <label>Klant:</label>
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="customerName" name="klant" class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Project:</label>
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="projectName" name="project" class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Onderwerp:</label>
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="subjectName" name="onderwerp" class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td-button">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" (click)='addCategory()'>Toevoegen</button>
+            </div>
+            <div *ngIf="categoryAdded" class="alert alert-success">
+              Categorie toegevoegd!
+            </div>
+          </td>
+        </tr>
+
+      </table>
+  </div>
+</div>

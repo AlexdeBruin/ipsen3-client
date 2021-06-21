@@ -1,0 +1,75 @@
+<div ng-app="myApp" ng-controller="myController" class="container">
+  <form name="myForm">
+    <div class="account-container">
+      <div class="row">
+          <h1>Account aanmaken</h1>
+          <div class="card" style="padding: 20px;">
+        <table>
+          <tr>
+            <td>
+              <label>Voornaam:</label>
+            </td>
+            <td>
+              <input type="voornaam" [(ngModel)]="user.voornaam" name="voornaam" required class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Tussenvoegsel:</label>
+            </td>
+            <td>
+              <input type="tussenvoegsel" [(ngModel)]="user.tussenvoegsel" name="tussenvoegsel" required class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Achternaam:</label>
+            </td>
+            <td>
+              <input type="achternaam" [(ngModel)]="user.achternaam" name="achternaam" required class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Email:</label>
+            </td>
+            <td>
+              <input type="email" [(ngModel)]="user.email" name="email" required class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Rechten:</label>
+            </td>
+            <td>
+              <select [(ngModel)]="rechten" name="user.rechten" class="form-control">
+                <option>Personeel</option>
+                <option>Administratie</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="button">
+              <div class="form-group">
+                <button [disabled]="!user.voornaam||!user.achternaam||!user.email||!rechten" type="button" class="btn btn-secondary btn-block" (click)='addAccount()'>Toevoegen</button>
+              </div>
+              <div style="width: 100%;"*ngIf="gelukt" class="alert alert-success">
+                <strong>Gelukt!</strong> Nieuw account is toegevoegd.
+              </div>
+              <div *ngIf="accountCreated" class="alert alert-success">
+                Account aangemaakt!
+              </div>
+              <div *ngIf="accountCreated == false" class="alert alert-danger">
+                Account niet aangemaakt!
+              </div>
+            </td>
+          </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

@@ -1,0 +1,50 @@
+
+td {
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+button{
+    width: 100%;
+}
+
+.container {
+    max-width: 700px;
+}
+
+.btn-primary:hover {
+    background-color: #00675b;
+    border-color: #009688;
+    transition: 0.2s, ease-in-out
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #009688;
+    border-color: #009688;
+    width: 100%;
+    height: 50px;
+}
+
+label {
+    margin-top: 4px;
+}
+
+.card{
+  box-shadow: 0 2px 5px 0 #bbbbbb;
+  width: 100%;
+  margin-bottom: 30px;
+  border: none;
+}
+
+.addingstuff-container{
+    padding-top: 50px;
+    max-width: 340px; 
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  #klant{
+      margin-right: 80px;
+  }
+  

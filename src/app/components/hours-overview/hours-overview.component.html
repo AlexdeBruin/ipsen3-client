@@ -1,0 +1,81 @@
+<div class = container-fluid>
+  <h1>Urenoverzicht</h1>
+
+  <div style="width: 100%;"*ngIf="fout" class="alert alert-danger">
+    Er is iets mis gegaan!
+  </div>
+  <div *ngIf="!fout">
+  <div class="naarlinks">
+      <div class="card" style="padding: 20px;">
+        <div class="form-group">
+          <table>
+            <tr class = "rightfloat">
+              <td><label for="einddatum">Datum: </label></td>
+              <td><input type="date" class="form-control" id="begindatum" date-set="" [(ngModel)]="searchStartDate"></td>
+            </tr>
+            <tr class = "rightfloat">
+              <td><label for="klant">Klant: </label> </td>
+              <td><input type="text" class="form-control" id="klant" name="searchCustomer" [(ngModel)]="searchCustomer"></td>
+            </tr>
+            <tr class = "rightfloat">
+              <td><label for="project">Project: </label> </td>
+              <td><input type="text" class="form-control" id="project" [(ngModel)]="searchProject"></td>
+            </tr>
+            <tr class = "rightfloat">
+              <td><label for="onderwerp">Onderwerp: </label> </td>
+              <td><input type="text" class="form-control" id="onderwerp" [(ngModel)]="searchSubject"></td>
+            </tr>
+          </table>
+        </div>
+        <button type="button" class="btn" class="download" (click)='createCsv()'>Download CSV</button>
+      </div>
+    </div>
+  <section>
+    <div class="card" class="col-md-9">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Datum</th>
+          <th scope="col">Begintijd</th>
+          <th scope="col">Eindtijd</th>
+          <th scope="col">Commentaar</th>
+          <th scope="col">Personeelslid</th>
+          <th scope="col">Klant</th>
+          <th scope="col">Project</th>
+          <th scope="col">Onderwerp</th>
+          <th *ngIf="auth.getActiveUser().rechten == 1" scope="col">Goedgekeurd</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hour of hours | sortBy : 'confirmed' |  filter: 'customerName': searchCustomer | filter: 'projectName' : searchProject | filter: 'subjectName' : searchSubject | filter:'startingDate' : searchStartDate" >
+          <td>{{hour.startingDate}}</td>
+          <td>{{hour.startingTime}}</td>
+          <td>{{hour.endingTime}}</td>
+          <td>{{hour.comment}}</td>
+          <td>{{hour.employeeName}}</td>
+          <td>{{hour.customerName}}</td>
+          <td>{{hour.projectName}}</td>
+          <td>{{hour.subjectName}}</td>
+          <td *ngIf="hour.confirmed === false && auth.getActiveUser().rechten == 1">
+          <select #selectElement (change)="setConfirmed(hour)">
+              <option>Nee</option>
+              <option>Ja</option>
+            </select>
+            </td>
+          <td *ngIf="hour.confirmed && auth.getActiveUser().rechten == 1">
+            <select #selectElement (change)="setConfirmed(hour)">
+              <option>Ja</option>
+              <option>Nee</option>
+            </select>
+          </td>
+          <td>
+              <button type="button" [disabled]="hour.confirmed" class="btn btn-primary" (click)="sendHour(hour)" routerLink="/wijzigen">Wijzigen</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+<div>
